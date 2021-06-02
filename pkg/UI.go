@@ -3,6 +3,7 @@ package PortScanner
 import (
 	"fmt"
 	"image/color"
+	"strconv"
 
 	"gioui.org/io/pointer"
 	"gioui.org/layout"
@@ -17,6 +18,7 @@ var (
 	IP = "localhost"
 
 	PortParagraphTxt string
+	progress         float32
 
 	//Widgets
 	DeviceIP = &widget.Editor{
@@ -38,6 +40,7 @@ func DrawUI(gtx layout.Context, th *material.Theme) layout.Dimensions {
 
 	widgets := []layout.Widget{
 		material.H6(th, "Port Scanner").Layout,
+
 		//Device ip form
 		func(gtx C) D {
 			e := material.Editor(th, DeviceIP, "Device IP: ")
@@ -49,6 +52,7 @@ func DrawUI(gtx layout.Context, th *material.Theme) layout.Dimensions {
 			})
 		},
 		//Scan button
+
 		func(gtx C) D {
 			in := layout.UniformInset(unit.Dp(8))
 			return layout.Flex{Alignment: layout.Middle}.Layout(gtx,
@@ -64,8 +68,8 @@ func DrawUI(gtx layout.Context, th *material.Theme) layout.Dimensions {
 									fmt.Println(err)
 								}
 							}()
-
 						}
+
 						dims := material.Button(th, ScanButton, "Scan").Layout(gtx)
 						pointer.CursorNameOp{Name: pointer.CursorPointer}.Add(gtx.Ops)
 						return dims
@@ -73,6 +77,9 @@ func DrawUI(gtx layout.Context, th *material.Theme) layout.Dimensions {
 				}),
 			)
 		},
+
+		material.ProgressBar(th, progress/65535).Layout,
+		material.Label(th, unit.Dp(16), "Scanning port "+strconv.Itoa(int(progress))+" of 65535").Layout,
 
 		func(gtx C) D {
 			in := layout.UniformInset(unit.Dp(8))

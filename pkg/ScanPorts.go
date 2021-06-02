@@ -9,11 +9,17 @@ import (
 )
 
 func Scan(IP string) error {
-	if IP == "" {
-		return errors.New("no ip given")
+	if net.ParseIP(IP) == nil {
+		fmt.Println("Invalid IP address")
+
+		PortParagraphTxt = PortParagraphTxt + "\nInvalid IP address"
+
+		return errors.New("invalid ip address")
 	}
 
 	for i := 1; i < 65535; i++ {
+		progress++
+
 		timeout := time.Duration(19 * time.Millisecond)
 		port := strconv.Itoa(i)
 
