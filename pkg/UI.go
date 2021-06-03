@@ -15,7 +15,8 @@ import (
 var (
 	border = widget.Border{Color: color.NRGBA{A: 0xff}, CornerRadius: unit.Dp(5), Width: unit.Px(1.5)}
 
-	IP = "localhost"
+	IP      = "127.0.0.1"
+	Timeout = "25"
 
 	PortParagraphTxt string
 	progress         float32
@@ -25,8 +26,13 @@ var (
 		SingleLine: true,
 		Submit:     true,
 	}
-	ScanButton = new(widget.Clickable)
-	list       = &layout.List{
+	TimeoutForm = &widget.Editor{
+		SingleLine: true,
+		Submit:     true,
+	}
+	ScanButton     = new(widget.Clickable)
+	ClearLogButton = new(widget.Clickable)
+	list           = &layout.List{
 		Axis: layout.Vertical,
 	}
 )
@@ -51,8 +57,17 @@ func DrawUI(gtx layout.Context, th *material.Theme) layout.Dimensions {
 				return layout.UniformInset(unit.Dp(8)).Layout(gtx, e.Layout)
 			})
 		},
-		//Scan button
+		//Timeout form
+		func(gtx C) D {
+			timeoutForm := material.Editor(th, TimeoutForm, "Timeout (min. 19): ")
 
+			Timeout = timeoutForm.Editor.Text()
+
+			return border.Layout(gtx, func(gtx C) D {
+				return layout.UniformInset(unit.Dp(8)).Layout(gtx, timeoutForm.Layout)
+			})
+		},
+		//Scan button
 		func(gtx C) D {
 			in := layout.UniformInset(unit.Dp(8))
 			return layout.Flex{Alignment: layout.Middle}.Layout(gtx,
@@ -89,6 +104,22 @@ func DrawUI(gtx layout.Context, th *material.Theme) layout.Dimensions {
 						PortParagraph := material.Label(th, unit.Dp(16), PortParagraphTxt).Layout(gtx)
 
 						return PortParagraph
+					})
+				}),
+			)
+		},
+		func(gtx C) D {
+			in := layout.UniformInset(unit.Dp(8))
+			return layout.Flex{Alignment: layout.Middle}.Layout(gtx,
+				layout.Rigid(func(gtx C) D {
+					return in.Layout(gtx, func(gtx C) D {
+						for ClearLogButton.Clicked() {
+							PortParagraphTxt = ""
+						}
+
+						dims := material.Button(th, ClearLogButton, "Clear log").Layout(gtx)
+						pointer.CursorNameOp{Name: pointer.CursorPointer}.Add(gtx.Ops)
+						return dims
 					})
 				}),
 			)

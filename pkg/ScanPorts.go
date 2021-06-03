@@ -17,13 +17,24 @@ func Scan(IP string) error {
 		return errors.New("invalid ip address")
 	}
 
+	if Timeout == "" {
+		Timeout = "19"
+	}
+
+	t, err := strconv.ParseInt(Timeout, 10, 64)
+	if err != nil {
+		fmt.Println(err)
+		PortParagraphTxt = PortParagraphTxt + "\nError, invalid timeout time"
+		return err
+	}
+
 	for i := 1; i < 65535; i++ {
 		progress++
 
-		timeout := time.Duration(19 * time.Millisecond)
+		timeout := time.Duration(time.Duration(t) * time.Millisecond)
 		port := strconv.Itoa(i)
 
-		_, err := net.DialTimeout("tcp", IP+":"+port, timeout)
+		_, err = net.DialTimeout("tcp", IP+":"+port, timeout)
 		if err != nil {
 			//fmt.Printf("%s %s %s\n", IP, "not responding", err.Error())
 		} else {
