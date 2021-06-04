@@ -114,6 +114,8 @@ func DrawUI(gtx layout.Context, th *material.Theme) layout.Dimensions {
 				layout.Rigid(func(gtx C) D {
 					return in.Layout(gtx, func(gtx C) D {
 						for ClearLogButton.Clicked() {
+							progress = 0
+
 							PortParagraphTxt = ""
 						}
 
