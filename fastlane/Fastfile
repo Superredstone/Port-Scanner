@@ -17,8 +17,11 @@ default_platform(:android)
 
 platform :android do
   desc "Automatic build"
-  lane :build do
+  lane :build_android do
     build_golang_android
     # add actions here: https://docs.fastlane.tools/actions
+  end
+  lane :build_windows do 
+    build_golang_windows
   end
 end

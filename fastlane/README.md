@@ -16,11 +16,16 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## Android
-### android build
+### android build_android
 ```
-fastlane android build
+fastlane android build_android
 ```
 Automatic build
+### android build_windows
+```
+fastlane android build_windows
+```
+
 
 ----
 
