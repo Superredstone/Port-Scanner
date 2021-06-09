@@ -5,17 +5,17 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: update_fastlane" time="2.9921223">
+      <testcase classname="fastlane.lanes" name="0: update_fastlane" time="2.6277382">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: default_platform" time="0.0027273">
+      <testcase classname="fastlane.lanes" name="1: default_platform" time="0.0019508">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: build_golang_android" time="42.4093747">
+      <testcase classname="fastlane.lanes" name="2: build_golang_android" time="6.2455977">
         
       </testcase>
     

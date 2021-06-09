@@ -11,6 +11,7 @@ module Fastlane
 
         if !File.directory?("build/")
           sh "mkdir build/"
+        end
         sh "cd build/"
         sh "go get -u gioui.org/cmd/gogio"
         sh "gogio -target android -o build/PortScanner-android.apk -icon assets/icon.png -version=4 -appid com.portscanner.superredstone ."
