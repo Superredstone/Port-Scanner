@@ -74,8 +74,6 @@ func DrawUI(gtx layout.Context, th *material.Theme) layout.Dimensions {
 				layout.Rigid(func(gtx C) D {
 					return in.Layout(gtx, func(gtx C) D {
 						for ScanButton.Clicked() {
-							InitializePortParagraph()
-
 							//Run scan on ports
 							go func() {
 								err := Scan(IP)

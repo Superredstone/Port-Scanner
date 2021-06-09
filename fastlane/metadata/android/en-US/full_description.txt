@@ -1,0 +1,2 @@
+A simple open source port scanning application for penetration testing purposes.
+It supports ONLY tcp connections 

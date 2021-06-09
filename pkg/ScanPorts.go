@@ -10,8 +10,6 @@ import (
 
 func Scan(IP string) error {
 	if net.ParseIP(IP) == nil {
-		fmt.Println("Invalid IP address")
-
 		PortParagraphTxt = PortParagraphTxt + "\nInvalid IP address"
 
 		return errors.New("invalid ip address")
@@ -23,7 +21,6 @@ func Scan(IP string) error {
 
 	t, err := strconv.ParseInt(Timeout, 10, 64)
 	if err != nil {
-		fmt.Println(err)
 		PortParagraphTxt = PortParagraphTxt + "\nError, invalid timeout time"
 		return err
 	}

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com"
-    package="com.portscanner.superredstone">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.portscanner.superredstone"
+    android:versionCode="4"
+    android:versionName="1.2.1">
 
     <uses-feature android:glEsVersion="0x00030000" android:required="true" />
 
@@ -8,4 +10,8 @@
         android:label="Port Scanner">
         
     </application>
+    <service
+        android:name=".PortScannerService"
+        android:exported="false">
+    </service>
 </manifest>
